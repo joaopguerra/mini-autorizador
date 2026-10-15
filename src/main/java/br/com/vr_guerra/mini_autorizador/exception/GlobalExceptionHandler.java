@@ -29,4 +29,15 @@ public class GlobalExceptionHandler {
             CartaoNaoEncontradoException exception) {
         return ResponseEntity.notFound().build();
     }
+
+
+    @ExceptionHandler(TransacaoNegadaException.class)
+    public ResponseEntity<String> tratarTransacaoNegada(
+            TransacaoNegadaException exception) {
+        return ResponseEntity
+                .unprocessableEntity()
+                .contentType(org.springframework.http.MediaType.TEXT_PLAIN)
+                .body(exception.getMessage());
+    }
+
 }
