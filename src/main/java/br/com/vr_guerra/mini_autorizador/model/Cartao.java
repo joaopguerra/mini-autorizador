@@ -1,9 +1,6 @@
 package br.com.vr_guerra.mini_autorizador.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -14,8 +11,14 @@ public class Cartao {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Column(nullable = false, unique = true)
     private String numeroCartao;
+
+    @Column(nullable = false)
     private BigDecimal saldo = BigDecimal.valueOf(500.00);
+
+    @Column(nullable = false)
     private String senha;
 
     public Cartao() {

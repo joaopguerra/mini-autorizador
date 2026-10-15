@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @RestController
 public class CartaoController {
 
-    private CartaoService cartaoService;
+    private final CartaoService cartaoService;
 
     public CartaoController(CartaoService cartaoService) {
         this.cartaoService = cartaoService;
