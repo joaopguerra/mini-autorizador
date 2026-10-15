@@ -23,4 +23,10 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.unprocessableEntity().body(response);
     }
+
+    @ExceptionHandler(CartaoNaoEncontradoException.class)
+    public ResponseEntity<Void> tratarCartaoNaoEncontrado(
+            CartaoNaoEncontradoException exception) {
+        return ResponseEntity.notFound().build();
+    }
 }

@@ -6,9 +6,9 @@ import br.com.vr_guerra.mini_autorizador.model.CartaoResponse;
 import br.com.vr_guerra.mini_autorizador.service.CartaoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @RestController
 public class CartaoController {
@@ -34,6 +34,15 @@ public class CartaoController {
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/cartoes/{numeroCartao}")
+    public ResponseEntity<BigDecimal> consultaSaldoPorCartao(
+            @PathVariable String numeroCartao) {
+
+        BigDecimal saldo = cartaoService.consultarSaldoPorCartao(numeroCartao);
+
+        return ResponseEntity.ok(saldo);
     }
 
 }

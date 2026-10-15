@@ -1,12 +1,13 @@
 package br.com.vr_guerra.mini_autorizador.service;
 
 import br.com.vr_guerra.mini_autorizador.exception.CartaoExistenteException;
+import br.com.vr_guerra.mini_autorizador.exception.CartaoNaoEncontradoException;
 import br.com.vr_guerra.mini_autorizador.model.Cartao;
 import br.com.vr_guerra.mini_autorizador.model.CartaoRequest;
 import br.com.vr_guerra.mini_autorizador.repository.CartaoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.math.BigDecimal;
 
 @Service
 public class CartaoService {
@@ -26,5 +27,11 @@ public class CartaoService {
 
         Cartao cartao = new Cartao(numeroCartao, senha);
         return cartaoRepository.save(cartao);
+    }
+
+    public BigDecimal consultarSaldoPorCartao(String numeroCartao) {
+        return cartaoRepository.findByNumeroCartao(numeroCartao)
+                .orElseThrow(CartaoNaoEncontradoException::new)
+                .getSaldo();
     }
 }
